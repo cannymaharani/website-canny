@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GeoArch Studio - GIS, Web Dev, & Jasa Arsitektur</title>
+  <meta name="description" content="Jasa pembuatan peta GIS, WebGIS, desain arsitektur, gambar DED, RAB, dan website profesional untuk mahasiswa, konsultan AMDAL, dan bisnis.">
+  <meta property="og:title" content="GeoArch Studio - GIS, Arsitektur & Web Development">
+  <meta property="og:description" content="Pemetaan GIS, WebGIS, DED & RAB, dan pembuatan website profesional.">
+  <meta property="og:image" content="assets/images/og-image.svg">
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+  </script>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-emerald-500 selection:text-slate-950">
+
+  <!-- NAVBAR -->
+  <nav class="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-lg border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3 group">
+        <img src="assets/images/logo.svg" alt="Logo GeoArch Studio" class="w-11 h-11 rounded-2xl shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition">
+        <div>
+          <span class="font-extrabold text-xl tracking-tight text-white block">GeoArch <span class="text-emerald-400">Studio</span></span>
+          <span class="text-[10px] text-slate-400 block tracking-widest font-semibold uppercase">GIS, Architecture & Web Dev</span>
+        </div>
+      </a>
+
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="#katalog" class="hover:text-emerald-400 transition">Katalog Layanan</a>
+        <a href="#kalkulator" class="hover:text-emerald-400 transition">Kalkulator Biaya</a>
+        <a href="#alur" class="hover:text-emerald-400 transition">Alur Kerja</a>
+        <a href="#faq" class="hover:text-emerald-400 transition">FAQ</a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="#kalkulator" class="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-emerald-500 text-xs font-semibold text-slate-200 transition">
+          <i class="fa-solid fa-basket-shopping text-emerald-400"></i>
+          <span>Keranjang</span>
+          <span id="navCartBadge" class="w-5 h-5 rounded-full bg-emerald-500 text-slate-950 text-[10px] font-bold flex items-center justify-center">0</span>
+        </a>
+        <button onclick="openDirectWA()" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-slate-950 font-bold text-xs flex items-center gap-2 shadow-lg shadow-emerald-500/25 transition active:scale-95">
+          <i class="fa-brands fa-whatsapp text-base"></i>
+          <span>Konsultasi Gratis</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="relative py-12 lg:py-20 overflow-hidden border-b border-slate-800/60">
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-1/3 right-10 w-[400px] h-[300px] bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-6 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            GIS • Arsitektur & RAB • Web Development
+          </div>
+          <h1 class="text-4xl sm:text-5xl font-extrabold text-white leading-tight tracking-tight">
+            Studio Pemetaan, <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-emerald-400 to-cyan-400">Arsitektur</span> & Web Development
+          </h1>
+          <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+            Layanan profesional terpadu: <strong>Pembuatan Peta & Analisis GIS</strong>, <strong>Perancangan Arsitektur, Gambar DED & RAB</strong>, serta <strong>Pembuatan Website Interaktif / WebGIS</strong> untuk Mahasiswa, AMDAL, Konsultan & Bisnis.
+          </p>
+          <div class="grid grid-cols-3 gap-3 pt-2">
+            <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-center">
+              <div class="text-emerald-400 font-bold text-lg">Peta & WebGIS</div>
+              <div class="text-[11px] text-slate-400">Presisi tinggi</div>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-center">
+              <div class="text-amber-400 font-bold text-lg">DED & RAB</div>
+              <div class="text-[11px] text-slate-400">Format Lengkap</div>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-center">
+              <div class="text-cyan-400 font-bold text-lg">Web Dev</div>
+              <div class="text-[11px] text-slate-400">GitHub Ready</div>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center gap-4 pt-4">
+            <a href="#katalog" class="px-6 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm shadow-xl shadow-emerald-500/25 flex items-center gap-2 transition">
+              <i class="fa-solid fa-map-location-dot"></i> Lihat Katalog
+            </a>
+            <a href="#kalkulator" class="px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 font-semibold text-sm flex items-center gap-2 transition">
+              <i class="fa-solid fa-calculator text-cyan-400"></i> Hitung Biaya Simulasi
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6">
+          <div class="relative rounded-3xl p-2 bg-gradient-to-b from-slate-700 to-slate-900 border border-slate-800 shadow-2xl glow-effect">
+            <div class="flex items-center justify-between px-4 py-2.5 bg-slate-950 rounded-t-2xl border-b border-slate-800">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span>
+                <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
+                <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+                <span class="text-xs text-slate-400 font-mono ml-2">preview_spatial_gis.shp</span>
+              </div>
+              <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2.5 py-0.5 rounded-full border border-emerald-500/30">Live Spatial Widget</span>
+            </div>
+            <div id="heroMap" class="h-80 sm:h-96 w-full rounded-b-2xl z-10 bg-slate-900"></div>
+            <div class="absolute bottom-6 left-6 z-20 bg-slate-950/90 border border-slate-800 rounded-xl p-3 backdrop-blur-md text-xs shadow-xl hidden sm:block">
+              <div class="font-bold text-slate-200 flex items-center gap-2"><i class="fa-solid fa-layer-group text-emerald-400"></i> Layer Analisis Aktif</div>
+              <div class="text-[11px] text-slate-400 mt-1">• Land Use Overlay (Zonasi)<br>• Buffer Radius Spasial (2,5 km)<br>• Titik POI & Kontur Topografi</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KATALOG -->
+  <section id="katalog" class="py-16 lg:py-24 bg-slate-950 border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">Katalog Layanan</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-3">Pilih Layanan Sesuai Kebutuhan Anda</h2>
+        <p class="text-slate-400 text-sm mt-2">Layanan peta sudah termasuk file cetak High-Res (PDF/PNG 300 DPI) & file mentah spasial (.SHP / .GeoJSON / .KMZ).</p>
+      </div>
+
+      <div class="flex justify-center mb-10">
+        <div class="inline-flex p-1.5 rounded-2xl bg-slate-900 border border-slate-800 gap-1 overflow-x-auto max-w-full">
+          <button onclick="filterKatalog('all', this)" class="cat-btn active px-4 py-2.5 rounded-xl text-xs font-bold transition">Semua Layanan</button>
+          <button onclick="filterKatalog('gis', this)" class="cat-btn px-4 py-2.5 rounded-xl text-xs font-bold transition">GIS & Pemetaan</button>
+          <button onclick="filterKatalog('arsitektur', this)" class="cat-btn px-4 py-2.5 rounded-xl text-xs font-bold transition">Arsitektur, DED & RAB</button>
+          <button onclick="filterKatalog('webdev', this)" class="cat-btn px-4 py-2.5 rounded-xl text-xs font-bold transition">Web Development</button>
+        </div>
+      </div>
+
+      <div id="katalogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- KALKULATOR -->
+  <section id="kalkulator" class="py-16 lg:py-24 bg-slate-900/50 border-b border-slate-800/80 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        <div class="lg:col-span-7 space-y-6">
+          <div>
+            <span class="text-xs font-bold text-cyan-400 uppercase tracking-widest bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20">Kalkulator Estimasi Biaya</span>
+            <h2 class="text-3xl font-extrabold text-white mt-2">Sesuaikan Detail Pemesanan</h2>
+            <p class="text-slate-400 text-xs mt-1">Hitung estimasi total biaya pengerjaan secara transparan.</p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+              <h3 class="text-sm font-bold text-slate-200 flex items-center gap-2"><i class="fa-solid fa-layer-group text-emerald-400"></i> Layanan Ditambahkan</h3>
+              <span id="selectedCountBadge" class="text-xs text-slate-400 font-mono">0 item</span>
+            </div>
+            <div id="cartItemsContainer" class="space-y-3 min-h-[100px] flex flex-col justify-center"></div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
+            <label for="scaleSelect" class="text-xs font-bold text-slate-300 uppercase tracking-wider block">1. Cakupan Skala Proyek / Luas Bangunan</label>
+            <select id="scaleSelect" onchange="calculateTotal()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs text-slate-200 focus:outline-none focus:border-emerald-500 transition">
+              <option value="1">Skala Standar / Mikro (Desa / Bangunan &lt; 100 m²)</option>
+              <option value="1.3">Skala Menengah (Kecamatan / Bangunan 100 - 300 m²)</option>
+              <option value="1.7">Skala Besar / Makro (Kabupaten / Bangunan &gt; 300 m²)</option>
+            </select>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
+            <div class="flex justify-between items-center">
+              <label for="urgencyRange" class="text-xs font-bold text-slate-300 uppercase tracking-wider">2. Kecepatan Pengerjaan</label>
+              <span id="urgencyLabel" class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-md border border-emerald-500/20">Reguler (2-3 Hari)</span>
+            </div>
+            <input type="range" id="urgencyRange" min="1" max="2" step="1" value="1" oninput="calculateTotal()" class="w-full accent-emerald-500 bg-slate-950 h-2 rounded-lg cursor-pointer">
+            <div class="flex justify-between text-[11px] text-slate-500">
+              <span>Reguler (2-3 Hari)</span>
+              <span>Express (24 Jam Fast Track)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5">
+          <div class="sticky top-28 p-6 rounded-3xl bg-slate-900 border border-slate-800 shadow-2xl space-y-6 glow-accent">
+            <div class="border-b border-slate-800 pb-4">
+              <span class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Ringkasan Invoice</span>
+              <h3 class="text-xl font-bold text-white mt-1">Total Biaya Pemesanan</h3>
+            </div>
+
+            <div class="space-y-3 text-xs">
+              <div class="flex justify-between text-slate-400"><span>Subtotal Layanan</span><span id="summarySubtotal" class="font-mono text-slate-200">Rp 0</span></div>
+              <div class="flex justify-between text-slate-400"><span>Faktor Skala</span><span id="summaryScale" class="font-mono text-slate-200">1x</span></div>
+              <div class="flex justify-between text-slate-400"><span>Biaya Express</span><span id="summaryUrgency" class="font-mono text-slate-200">Rp 0</span></div>
+              <hr class="border-slate-800 my-2">
+              <div class="flex justify-between text-sm font-bold text-white pt-1">
+                <span>Total Estimasi Biaya</span>
+                <span id="summaryGrandTotal" class="text-xl text-emerald-400 font-mono">Rp 0</span>
+              </div>
+            </div>
+
+            <div class="space-y-3 pt-2">
+              <div>
+                <label for="clientName" class="text-[11px] text-slate-400 font-medium block mb-1">Nama Pemesan / Instansi</label>
+                <input type="text" id="clientName" placeholder="Contoh: Budi Santoso (Univ. Udayana)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500 transition">
+              </div>
+              <div>
+                <label for="clientAOI" class="text-[11px] text-slate-400 font-medium block mb-1">Lokasi Penelitian / Proyek</label>
+                <input type="text" id="clientAOI" placeholder="Contoh: Kec. Kuta Utara, Kab. Badung" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500 transition">
+              </div>
+            </div>
+
+            <div class="space-y-3 pt-2">
+              <button onclick="submitOrderToWA()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-slate-950 font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 transition active:scale-95">
+                <i class="fa-brands fa-whatsapp text-lg"></i> Kirim Orderan ke WhatsApp
+              </button>
+              <button onclick="openPaymentModal()" class="w-full py-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 text-slate-300 font-semibold text-xs flex items-center justify-center gap-2 transition">
+                <i class="fa-solid fa-qrcode text-amber-400"></i> Lihat Metode Pembayaran & QRIS
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALUR KERJA -->
+  <section id="alur" class="py-16 lg:py-24 bg-slate-950 border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">Proses Pengerjaan Transparan</span>
+        <h2 class="text-3xl font-extrabold text-white mt-3">4 Langkah Mudah Pemesanan</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 text-center hover:border-emerald-500/50 transition">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 font-bold text-lg flex items-center justify-center mx-auto mb-4 border border-emerald-500/20">1</div>
+          <h3 class="text-base font-bold text-white mb-2">Pilih Katalog & Order</h3>
+          <p class="text-xs text-slate-400">Pilih layanan, tentukan skala/lokasi, lalu kirim detailnya via WhatsApp Admin.</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 text-center hover:border-emerald-500/50 transition">
+          <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 text-cyan-400 font-bold text-lg flex items-center justify-center mx-auto mb-4 border border-cyan-500/20">2</div>
+          <h3 class="text-base font-bold text-white mb-2">DP 50% & Pengerjaan</h3>
+          <p class="text-xs text-slate-400">Bayar DP 50% via QRIS / Bank. Tim langsung memproses pekerjaan Anda.</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 text-center hover:border-emerald-500/50 transition">
+          <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 font-bold text-lg flex items-center justify-center mx-auto mb-4 border border-amber-500/20">3</div>
+          <h3 class="text-base font-bold text-white mb-2">Preview & Revisi</h3>
+          <p class="text-xs text-slate-400">Kami kirim draft ber-watermark. Anda berhak melakukan revisi minor.</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 text-center hover:border-emerald-500/50 transition">
+          <div class="w-12 h-12 rounded-2xl bg-purple-500/10 text-purple-400 font-bold text-lg flex items-center justify-center mx-auto mb-4 border border-purple-500/20">4</div>
+          <h3 class="text-base font-bold text-white mb-2">Pelunasan & Kirim File</h3>
+          <p class="text-xs text-slate-400">Setelah disetujui, lunasi sisa 50%. Seluruh file dikirim via Google Drive.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-16 lg:py-24 bg-slate-950 border-b border-slate-800/80">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-white">Pertanyaan Umum (FAQ)</h2>
+        <p class="text-slate-400 text-sm mt-1">Segala hal yang perlu Anda ketahui sebelum memesan.</p>
+      </div>
+      <div class="space-y-4">
+        <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800">
+          <h3 class="font-bold text-slate-200 text-sm">Berapa lama pengerjaannya?</h3>
+          <p class="text-xs text-slate-400 mt-2 leading-relaxed">Pengerjaan reguler membutuhkan waktu 2-3 hari kerja. Jika deadline mendesak, pilih layanan Express 24 jam fast-track.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800">
+          <h3 class="font-bold text-slate-200 text-sm">Apa saja output file yang akan saya dapatkan?</h3>
+          <p class="text-xs text-slate-400 mt-2 leading-relaxed">Untuk peta: file siap cetak High-Res (PDF & PNG 300 DPI) serta data spasial (.SHP, GeoJSON, KMZ). Untuk arsitektur: DWG, PDF, dan Excel (RAB). Untuk website: source code siap deploy ke GitHub Pages.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800">
+          <h3 class="font-bold text-slate-200 text-sm">Bagaimana jika hasilnya perlu direvisi?</h3>
+          <p class="text-xs text-slate-400 mt-2 leading-relaxed">Kami memberikan 2x garansi revisi minor (warna, judul layout, legenda, koreksi typo) secara GRATIS.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-12 bg-slate-950 text-slate-400 text-xs border-t border-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="flex items-center gap-3">
+        <img src="assets/images/logo.svg" alt="" class="w-8 h-8 rounded-xl">
+        <span class="font-bold text-slate-200 text-sm">GeoArch Studio © 2026</span>
+      </div>
+      <p>Jasa GIS, Arsitektur & Web Development Profesional.</p>
+    </div>
+  </footer>
+
+  <!-- MODAL PEMBAYARAN -->
+  <div id="paymentModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-3xl p-6 relative shadow-2xl space-y-5 max-h-[95vh] overflow-y-auto">
+      <button onclick="closePaymentModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white" aria-label="Tutup"><i class="fa-solid fa-xmark text-lg"></i></button>
+      <div class="text-center">
+        <span class="text-xs font-bold text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">Metode Pembayaran</span>
+        <h3 class="text-xl font-bold text-white mt-2">QRIS & Transfer Bank</h3>
+      </div>
+      <div class="p-4 bg-white rounded-2xl text-center text-slate-950 space-y-2">
+        <div class="font-bold text-sm tracking-wider uppercase">QRIS</div>
+        <!-- GANTI dengan screenshot QRIS asli Anda: assets/images/qris.png -->
+        <div class="w-48 h-48 mx-auto bg-slate-100 p-2 border border-slate-300 rounded-xl flex items-center justify-center">
+          <img src="assets/images/qris-placeholder.svg" alt="Kode QRIS" class="w-full h-full object-contain">
+        </div>
+        <p class="text-[11px] text-slate-600">Scan dengan BCA, Mandiri, BRI, GoPay, OVO, Dana, LinkAja, ShopeePay</p>
+      </div>
+      <div class="space-y-2 text-xs">
+        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 flex justify-between items-center">
+          <div><div class="font-bold text-slate-200">Bank BCA</div><div class="font-mono text-emerald-400">0000-0000-00</div></div>
+          <span class="text-slate-400 text-[11px]">a.n Nama Anda</span>
+        </div>
+        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 flex justify-between items-center">
+          <div><div class="font-bold text-slate-200">Bank Mandiri</div><div class="font-mono text-emerald-400">000-00-0000000-0</div></div>
+          <span class="text-slate-400 text-[11px]">a.n Nama Anda</span>
+        </div>
+      </div>
+      <button onclick="closePaymentModal()" class="w-full py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs rounded-xl transition">Tutup</button>
+    </div>
+  </div>
+
+  <!-- MODAL PREVIEW -->
+  <div id="previewModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="bg-slate-900 border border-slate-800 w-full max-w-2xl rounded-3xl p-6 relative shadow-2xl space-y-4 max-h-[95vh] overflow-y-auto">
+      <button onclick="closePreviewModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white" aria-label="Tutup"><i class="fa-solid fa-xmark text-lg"></i></button>
+      <div>
+        <span id="prevCatBadge" class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-md border border-emerald-500/20 uppercase">Kategori</span>
+        <h3 id="prevTitle" class="text-xl font-bold text-white mt-1">Judul</h3>
+      </div>
+      <div class="h-72 w-full rounded-2xl bg-slate-950 border border-slate-800 overflow-hidden">
+        <img id="prevImage" src="" alt="Preview" class="w-full h-full object-cover">
+      </div>
+      <p id="prevDesc" class="text-xs text-slate-400 leading-relaxed"></p>
+      <div class="flex justify-between items-center pt-2">
+        <span id="prevPrice" class="text-lg font-bold text-emerald-400 font-mono">Rp 0</span>
+        <button id="prevAddBtn" class="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs flex items-center gap-2 transition">
+          <i class="fa-solid fa-plus"></i> Tambah ke Pemesanan
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHATBOT -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <button id="chatToggle" onclick="toggleChatbot()" aria-label="Buka GeoBot" class="w-14 h-14 rounded-full bg-gradient-to-tr from-emerald-500 to-cyan-400 text-slate-950 font-bold text-2xl shadow-2xl flex items-center justify-center hover:scale-110 transition active:scale-95 pulse-glow">
+      <i class="fa-solid fa-robot"></i>
+    </button>
+    <div id="chatPanel" class="hidden absolute right-0 w-80 sm:w-96 bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl overflow-hidden flex flex-col h-[460px]">
+      <div class="p-4 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center"><i class="fa-solid fa-robot"></i></div>
+          <div>
+            <div class="font-bold text-xs text-white">GeoBot Assistant</div>
+            <div class="text-[10px] text-emerald-400 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Online</div>
+          </div>
+        </div>
+        <button onclick="toggleChatbot()" class="text-slate-400 hover:text-white" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div id="chatLog" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs">
+        <div class="bg-slate-800 text-slate-200 p-3 rounded-2xl rounded-tl-none max-w-[85%] leading-relaxed">
+          Halo! 👋 Saya <strong>GeoBot</strong>. Bingung mau pilih layanan apa untuk skripsi atau proyek Anda?
+        </div>
+      </div>
+      <div class="p-3 bg-slate-950 border-t border-slate-800 grid grid-cols-1 gap-2">
+        <button onclick="handleBotOption('gis')" class="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-left text-[11px] text-slate-300 border border-slate-800 transition">🗺️ Konsultasi Peta GIS & WebGIS</button>
+        <button onclick="handleBotOption('arsitektur')" class="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-left text-[11px] text-amber-400 border border-slate-800 transition">🏛️ Konsultasi Arsitektur, DED & RAB</button>
+        <button onclick="handleBotOption('webdev')" class="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-left text-[11px] text-cyan-400 border border-slate-800 transition">💻 Konsultasi Website & Portofolio</button>
+        <button onclick="handleBotOption('order')" class="p-2.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-left text-[11px] text-emerald-400 font-semibold border border-emerald-500/30 transition">💬 Hubungi Admin WhatsApp</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

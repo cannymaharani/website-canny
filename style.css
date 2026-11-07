@@ -1,0 +1,48 @@
+/* ===== GeoArch Studio - style.css ===== */
+html { scroll-behavior: smooth; }
+body { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+.glow-effect { box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.25); }
+.glow-accent { box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.25); }
+
+/* Leaflet dark popup */
+.leaflet-popup-content-wrapper {
+  background: #0f172a !important;
+  color: #f8fafc !important;
+  border: 1px solid #334155 !important;
+  border-radius: 12px !important;
+}
+.leaflet-popup-tip { background: #0f172a !important; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #0f172a; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #10b981; }
+
+/* Chatbot pulse */
+@keyframes pulse-ring {
+  0%   { transform: scale(0.95); opacity: 0.8; }
+  50%  { transform: scale(1.05); opacity: 0.4; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+.pulse-glow { animation: pulse-ring 3s infinite ease-in-out; }
+#chatPanel { bottom: 4.5rem; }
+
+/* Tab kategori katalog */
+.cat-btn { color: #94a3b8; white-space: nowrap; }
+.cat-btn:hover { color: #e2e8f0; }
+.cat-btn.active { background: #10b981; color: #020617; }
+
+/* Slider */
+input[type="range"] { -webkit-appearance: none; appearance: none; }
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 18px; height: 18px; border-radius: 9999px;
+  background: #10b981; border: 2px solid #020617;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 18px; height: 18px; border-radius: 9999px; background: #10b981; border: 2px solid #020617;
+}
+
+/* Safety: offset anchor untuk navbar sticky */
+section[id] { scroll-margin-top: 5rem; }
